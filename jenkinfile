@@ -1,0 +1,30 @@
+pipeline {
+    agent any
+    stages {
+        stage('Copy File') {
+            steps {
+                // This step copies the necessary file(s) for the build.
+                script {
+                    // Example command to copy files
+                    sh 'cp /html_file/index.html /usr/share/nginx/html'
+                }
+            }
+        }
+        stage('Build Docker Image') {
+            steps {
+                // This step will build the Docker image
+                script {
+                    // Build Docker image using the Dockerfile
+                    sh 'docker build -t my-nginx-image .'
+                }
+            }
+        }
+        stage('Run Docker Container') {
+            steps {
+                // Run the Docker container using the newly built image
+                script {
+                    sh 'docker run -d -p 80:80 my-nginx-image'
+            }
+        }
+    }
+}
