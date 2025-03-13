@@ -8,8 +8,8 @@ pipeline {
         stage('Environment Setup') {
             steps {
                 script {
-                    echo "Image Name: image_name"
-                    echo "Container Name: container_name"
+                    echo "Image Name: $image_name"
+                    echo "Container Name: $container_name"
                 }
             }
         }
