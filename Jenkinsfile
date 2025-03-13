@@ -20,20 +20,22 @@ pipeline {
             }
         }
 
-        stage('kill previous container') {
-            steps { 
-                if(container exist){
-                    sh "docker rm -f $container_name"
-                }
-                else{
-                    sh " "docker run -d -p 80:80 --name $container_name $image_name"
+       stage('Kill previous container') {
+    steps {
+        script {
+            // Check if the container exists
+            def containerExists = sh(script: "docker ps -a --filter name=${container_name} -q", returnStdout: true).trim()
+
+            if (containerExists) {
+                // If the container exists, remove it
+                sh "docker rm -f ${container_name}"
+            } else {
+                // If the container doesn't exist, run a new container
+                sh "docker run -d -p 80:80 --name ${container_name} ${image_name}"
             }
         }
-
-        // stage('Run Docker Container') {
-        //     steps {
-        //             sh "docker run -d -p 80:80 --name $container_name $image_name"
-        //     }
-        // }
+      } 
     }
+ }
 }
+                    
