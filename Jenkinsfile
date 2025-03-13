@@ -1,11 +1,11 @@
 pipeline{
     agent any
-    stages{
-        environment{
-             image_name='nginx-image'
-             container_name='pipeline-container'    
-           }
-        }
+    // stages{
+    //     environment{
+    //          image_name='nginx-image'
+    //          container_name='pipeline-container'    
+    //        }
+    //     }
          stage('kill previuos container'){
              steps{
                  // kill the previous container
