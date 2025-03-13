@@ -22,13 +22,11 @@ pipeline {
 
         stage('kill previous container') {
             steps { 
-                sh """
-                if
-                    "docker rm -f ${container_name}"
-                  then
-                    ""docker run -d -p 80:80 --name $container_name $image_name"
-                fi
-                """
+                if(container exist){
+                    sh "docker rm -f $container_name"
+                }
+                else{
+                    sh " "docker run -d -p 80:80 --name $container_name $image_name"
             }
         }
 
