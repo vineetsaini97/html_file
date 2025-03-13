@@ -16,19 +16,19 @@ pipeline {
         
         stage('Kill Previous Container') {
             steps {
-                        docker rm -f container_name  || true          
+                        docker rm -f $container_name  || true          
             }
         }
 
         stage('Build Docker Image') {
             steps {                
-                    sh "docker build -t image_name ."            
+                    sh "docker build -t $image_name ."            
             }
         }
 
         stage('Run Docker Container') {
             steps {
-                    sh "docker run -d -p 80:80 --name container_name image_name"
+                    sh "docker run -d -p 80:80 --name $container_name $image_name"
             }
         }
     }
