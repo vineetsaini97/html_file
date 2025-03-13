@@ -1,7 +1,7 @@
 pipeline{
     agent any
     stages{
-        environment('name'){
+        environment{
              image_name='nginx-image'
              container_name='pipeline-container'    
            }
