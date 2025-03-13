@@ -16,7 +16,7 @@ pipeline {
         
         stage('Kill Previous Container') {
             steps {
-                        docker rm -f container_name           
+                        docker rm -f container_name  || true          
             }
         }
 
