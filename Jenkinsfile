@@ -1,12 +1,12 @@
 pipeline {
     agent any
     stages {
-        stage('Copy File') {
-            steps {
-                // Example command to copy files
-                sh 'cp /index.html /usr/share/nginx/html'
-            }
-        }
+        // stage('Copy File') {
+        //     // steps {
+        //     //     // Example command to copy files
+        //     //     sh ' '
+        //     // }
+        // }
         stage('Build Docker Image') {
             steps {
                 // Build Docker image using the Dockerfile
