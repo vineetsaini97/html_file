@@ -14,16 +14,16 @@ pipeline {
             }
         }
         
-        stage('Kill Previous Container') {
+        stage('build docker image') {
             steps {
-                       sh "docker stop $container_name" 
-                       sh "docker rm -f $container_name"          
+                   sh "docker build -t $image_name ."
             }
         }
 
-        stage('Build Docker Image') {
-            steps {                
-                    sh "docker build -t $image_name ."            
+        stage('kill previous container') {
+            steps { 
+                    sh "docker stop $container_name" 
+                    sh "docker rm -f $container_name"                 
             }
         }
 
