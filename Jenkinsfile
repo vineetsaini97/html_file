@@ -4,7 +4,7 @@ pipeline {
         image_name = 'nginx-image'
         container_name = 'pipeline-container'
       }
-    stages {
+   stages {
        stage('Environment Setup') {
             steps {
                 script {
@@ -14,6 +14,7 @@ pipeline {
               }
            }
         }
+    
        stage('kill previuos container') {
             steps{
                  // kill the previous container
@@ -27,6 +28,7 @@ pipeline {
                   }
               }      
            }
+    
        stage('Build Docker Image') {
            steps {
                 // Build Docker image using the Dockerfile
@@ -35,8 +37,9 @@ pipeline {
                 }
             }
         }
+    
       stage('Run Docker Container') {
-            steps {
+          steps {
                 // Run the Docker container using the newly built image
                 script{
                   sh 'docker run -d -p 80:80 --name ${pipeline-container} ${nginx-image}'
