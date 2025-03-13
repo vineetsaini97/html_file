@@ -10,9 +10,9 @@ pipeline{
              steps{
                  // kill the previous container
                sh """
-                  if docker ps -a --filter name=$(container_name) -q; 
+                  if docker ps -a --filter name=${container_name} -q; 
                   then
-                  docker rm -f $(container_name)
+                  docker rm -f ${container_name}
                   fi
                  """
            }
