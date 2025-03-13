@@ -16,7 +16,8 @@ pipeline {
         
         stage('Kill Previous Container') {
             steps {
-                       sh "docker rm -f $container_name"  || true          
+                       sh "docker stop $container_name"  || true
+                       sh "docker rm -f $container_name" || true          
             }
         }
 
