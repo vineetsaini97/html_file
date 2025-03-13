@@ -3,8 +3,13 @@ pipeline {
     stages {
          stage('environment setup') {
              steps{
-                image_name='nginx-image'
-                 container_name='pipeline-container'    
+                 script {
+                    def image_name = 'nginx-image'
+                    def container_name = 'pipeline-container'
+                    
+                    echo "Image Name: ${image_name}"
+                    echo "Container Name: ${container_name}"
+                 }
            }
         }
          stage('kill previuos container') {
