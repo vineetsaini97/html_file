@@ -26,7 +26,7 @@ pipeline {
          stage('Build Docker Image') {
             steps {
                 // Build Docker image using the Dockerfile
-                sh 'docker build -t ${nginx-image} .'
+                sh 'docker build -t nginx-image .'
             }
         }
         stage('Run Docker Container') {
