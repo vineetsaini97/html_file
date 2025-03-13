@@ -1,15 +1,17 @@
 pipeline {
     agent any
+    environment {
+        image_name = 'nginx-image'
+        container_name = 'pipeline-container'
+      }
     stages {
-         stage('environment setup') {
-             steps{
-                 script {
-                    def image_name = 'nginx-image'
-                    def container_name = 'pipeline-container'
-                    
+        stage('Environment Setup') {
+            steps {
+                script {
                     echo "Image Name: ${image_name}"
                     echo "Container Name: ${container_name}"
                  }
+              }
            }
         }
          stage('kill previuos container') {
@@ -26,13 +28,13 @@ pipeline {
          stage('Build Docker Image') {
             steps {
                 // Build Docker image using the Dockerfile
-                sh 'docker build -t nginx-image .'
+                sh 'docker build -t ${nginx-image} .'
             }
         }
         stage('Run Docker Container') {
             steps {
                 // Run the Docker container using the newly built image
-                sh 'docker run -d -p 80:80 --name pipeline-container nginx-image'
+                sh 'docker run -d -p 80:80 --name ${pipeline-container} ${nginx-image}'
             }
         }
     }
