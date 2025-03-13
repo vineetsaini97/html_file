@@ -1,11 +1,11 @@
 pipeline{
     agent any
-    // stages{
-    //     environment{
-    //          image_name='nginx-image'
-    //          container_name='pipeline-container'    
-    //        }
-    //     }
+       stages{
+          steps{
+             image_name='nginx-image'
+              container_name='pipeline-container'    
+           }
+        }
          stage('kill previuos container'){
              steps{
                  // kill the previous container
@@ -20,7 +20,7 @@ pipeline{
          stage('Build Docker Image') {
             steps {
                 // Build Docker image using the Dockerfile
-                sh 'docker build -t nginx-image .'
+                sh 'docker build -t ${nginx-image} .'
             }
         }
         stage('Run Docker Container') {
