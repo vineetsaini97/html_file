@@ -1,9 +1,10 @@
-pipeline{
+pipeline {
     agent any
-       stages{
-          steps('environment') {
-             image_name='nginx-image'
-              container_name='pipeline-container'    
+    stages {
+         stage('environment setup') {
+             steps{
+                image_name='nginx-image'
+                 container_name='pipeline-container'    
            }
         }
          stage('kill previuos container') {
@@ -30,4 +31,4 @@ pipeline{
             }
         }
     }
-
+}
