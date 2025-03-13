@@ -6,7 +6,7 @@ pipeline{
               container_name='pipeline-container'    
            }
         }
-         stage('kill previuos container'){
+         stage('kill previuos container') {
              steps{
                  // kill the previous container
                sh """
