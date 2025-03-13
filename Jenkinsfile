@@ -2,8 +2,8 @@ pipeline{
     agent any
     stages{
         environment('name'){
-             image_name= 'nginx-image'
-             container_name= 'pipeline-container'    
+             image_name='nginx-image'
+             container_name='pipeline-container'    
            }
         }
          stage('kill previuos container'){
