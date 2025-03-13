@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent docker
     environment {
         image_name = 'nginx-image'
         container_name = 'pipeline-container'
@@ -16,22 +16,18 @@ pipeline {
         
         stage('Kill Previous Container') {
             steps {
-                
-                    sh """
+                sh """
                     if docker ps -a --filter name=${container_name} -q;
                     then
                         docker rm -f ${container_name}
                     fi
-                    """
-                
+                  """             
             }
         }
 
         stage('Build Docker Image') {
-            steps {
-                
-                    sh "docker build -t ${image_name} ."
-            
+            steps {                
+                    sh "docker build -t ${image_name} ."            
             }
         }
 
