@@ -1,32 +1,18 @@
 version: 2.1
 
-executors:
-  sonar-executor:
-    docker:
-      - image: cimg/openjdk:17.0  # Official image with Java pre-installed (SonarScanner needs Java)
+orbs:
+  sonarcloud: sonarsource/sonarcloud@2.0.0
 
 jobs:
-  sonarcloud-analysis:
-    executor: sonar-executor
-    environment:
-      SONAR_SCANNER_VERSION: 5.0.1.3006
+  analyze:
+    docker:
+      - image: cimg/openjdk:17.0
     steps:
       - checkout
-
-      - run:
-          name: Download SonarScanner CLI
-          command: |
-            curl -sSLo sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-${SONAR_SCANNER_VERSION}-linux.zip
-            unzip sonar-scanner.zip
-
-      - run:
-          name: Run SonarCloud Analysis
-          command: |
-            export PATH="$PATH:$(pwd)/sonar-scanner-${SONAR_SCANNER_VERSION}-linux/bin"
-            sonar-scanner -Dsonar.login=$SONAR_TOKEN
+      - sonarcloud/scan
 
 workflows:
   version: 2
-  run-sonar:
+  main:
     jobs:
-      - sonarcloud-analysis
+      - analyze
